@@ -1,0 +1,8 @@
+[p STACK_INTERNAL MODEL_0 SPACEOPT AUTOSTATIC NOTREENT ]
+"2 C:\Users\AADHIT~1\DOCUME~1\NATION~1\CIRCUI~1.0\MCUWOR~1\LCDC~1\project1\main.c
+[v _main `(v  1 e 0 0 ]
+{
+"11
+} 0
+[v _cmd `(i  0 e 2 0 ]
+[v _lcd_string `(i  0 e 2 0 ]

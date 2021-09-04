@@ -1,0 +1,13 @@
+$MOD51	
+
+	LOOP:SETB P1.0
+		 ACALL DELAY
+		 CLR P1.0
+		 ACALL DELAY
+		 SJMP LOOP
+
+	 DELAY: MOV R1,01H
+		L1: DJNZ R1,L1
+			RET
+		 
+          END

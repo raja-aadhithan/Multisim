@@ -1,0 +1,25 @@
+SQWAVE                                                                                                        PAGE 1
+
+                       1    $MOD51  ; This includes 8051 definitions for the Metalink assembler
+                       2    
+                       3    ; Please insert your code here.
+                       4    
+0000 D290              5            LOOP:SETB P1.0
+0002 110A              6                     ACALL DELAY
+0004 C290              7                     CLR P1.0
+0006 110A              8                     ACALL DELAY
+0008 80F6              9                     SJMP LOOP
+                      10    
+000A A901             11             DELAY: MOV R1,01H
+000C D9FE             12                    L1: DJNZ R1,L1
+000E 22               13                            RET
+                      14                     
+                      15              END
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+SQWAVE                                                                                                        PAGE 2
+
+DELAY. . . . . . . . . . . . . .  C ADDR  000AH  
+L1 . . . . . . . . . . . . . . .  C ADDR  000CH  
+LOOP . . . . . . . . . . . . . .  C ADDR  0000H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  

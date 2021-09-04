@@ -1,0 +1,25 @@
+LED                                                                                                           PAGE 1
+
+                       1    $MOD51  ; This includes 8051 definitions for the Metalink assembler
+                       2       
+0000 D281              3    LOOP:    SETB P0.1
+0002 C280              4                     CLR  P0.0
+0004 110E              5                     ACALL DELAY
+0006 C281              6                     CLR P0.1
+0008 D280              7                     SETB P0.0
+000A 110E              8                     ACALL DELAY
+000C 80F2              9                     SJMP LOOP
+                      10    
+000E A901             11             DELAY: MOV R1,01H
+0010 D9FE             12                    L1: DJNZ R1,L1
+0012 22               13                            RET
+                      14                     
+                      15              END
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+LED                                                                                                           PAGE 2
+
+DELAY. . . . . . . . . . . . . .  C ADDR  000EH  
+L1 . . . . . . . . . . . . . . .  C ADDR  0010H  
+LOOP . . . . . . . . . . . . . .  C ADDR  0000H  
+P0 . . . . . . . . . . . . . . .  D ADDR  0080H  PREDEFINED  

@@ -1,0 +1,77 @@
+MAIN                                                                                                          PAGE 1
+
+                       1    $MOD51  
+0000 759000            2                    MOV P1,#00H
+0003 758000            3                    MOV P0,#00H
+                       4    
+0006 7400              5    loop:   MOV A , #00H
+                       6    ; CHECK THE VALUE 0F INPUT
+0008 309002            7                    JNB P1.0, L1 ; row 0
+000B 2401              8                    ADD A , #01H
+                       9    
+000D 309102           10            L1: JNB P1.1, L2 ; row 1
+0010 2402             11                    ADD A , #02H
+                      12    
+0012 309202           13            L2: JNB P1.2, L3 ; col 0
+0015 2404             14                    ADD A , #04H
+                      15    
+0017 309302           16            L3: JNB P1.3, L4 ; col 1
+001A 2408             17                    ADD A , #08H
+                      18                    
+                      19    ; MAP THE INPUT TO OUTPUT
+001C F5F0             20            L4: MOV B, A
+001E B4050C           21                    CJNE A,#05H ,L5 ; switch 1,1
+0021 758007           22                    MOV P0,#07H
+0024 309003           23            LA: JNB P1.0, LX 
+0027 2092FA           24                JB P1.2, LA 
+002A 02005D           25            LX:     LJMP L16
+                      26    
+002D E5F0             27            L5: MOV A,B
+002F B4060C           28                    CJNE A,#06H ,L6 ; switch 1,2
+0032 758079           29                    MOV P0,#79H
+0035 309003           30            LB: JNB P1.0, LY
+0038 2093FA           31                JB P1.3, LB 
+003B 02005D           32            LY: LJMP L16
+                      33    
+003E E5F0             34            L6: MOV A,B
+0040 B4090C           35                    CJNE A,#09H ,L7 ; switch 2,1
+0043 758007           36                    MOV P0,#07H
+0046 309103           37            LC: JNB P1.1, LZ
+0049 2092FA           38                JB P1.2, LC
+004C 02005D           39            LZ: LJMP L16
+                      40    
+004F E5F0             41            L7: MOV A,B
+0051 B40A09           42                    CJNE A,#0AH ,L16 ; switch 2,2
+0054 75806F           43                    MOV P0,#6FH
+0057 309103           44            LD: JNB P1.1, L16 
+005A 2093FA           45                JB P1.3, LD 
+                      46    
+005D 020006           47       L16: LJMP loop
+                      48                    
+                      49      
+                      50    END
+                      51    
+                      52    
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 2
+
+B. . . . . . . . . . . . . . . .  D ADDR  00F0H  PREDEFINED  
+L1 . . . . . . . . . . . . . . .  C ADDR  000DH  
+L16. . . . . . . . . . . . . . .  C ADDR  005DH  
+L2 . . . . . . . . . . . . . . .  C ADDR  0012H  
+L3 . . . . . . . . . . . . . . .  C ADDR  0017H  
+L4 . . . . . . . . . . . . . . .  C ADDR  001CH  
+L5 . . . . . . . . . . . . . . .  C ADDR  002DH  
+L6 . . . . . . . . . . . . . . .  C ADDR  003EH  
+L7 . . . . . . . . . . . . . . .  C ADDR  004FH  
+LA . . . . . . . . . . . . . . .  C ADDR  0024H  
+LB . . . . . . . . . . . . . . .  C ADDR  0035H  
+LC . . . . . . . . . . . . . . .  C ADDR  0046H  
+LD . . . . . . . . . . . . . . .  C ADDR  0057H  
+LOOP . . . . . . . . . . . . . .  C ADDR  0006H  
+LX . . . . . . . . . . . . . . .  C ADDR  002AH  
+LY . . . . . . . . . . . . . . .  C ADDR  003BH  
+LZ . . . . . . . . . . . . . . .  C ADDR  004CH  
+P0 . . . . . . . . . . . . . . .  D ADDR  0080H  PREDEFINED  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  

@@ -1,0 +1,82 @@
+MAIN                                                                                                          PAGE 1
+
+                       1    $MOD51 ; this includes 8051 
+0000                   2    ORG 0000
+                       3    ;STORING NAME IN 60H TO 6FH
+0000 7960              4                    MOV R1 ,#60H
+0002 7754              5                    MOV @R1,#'T'
+0004 09                6                    INC R1
+0005 7720              7                    MOV @R1,#' '
+0007 09                8                    INC R1
+0008 7752              9                    MOV @R1,#'R'
+000A 09               10                    INC R1
+000B 7741             11                    MOV @R1,#'A'
+000D 09               12                    INC R1
+000E 774A             13                    MOV @R1,#'J'
+0010 09               14                    INC R1
+0011 7741             15                    MOV @R1,#'A'
+0013 09               16                    INC R1
+0014 7720             17                    MOV @R1,#' '
+0016 09               18                    INC R1
+0017 7741             19                    MOV @R1,#'A'
+0019 09               20                    INC R1
+001A 7741             21                    MOV @R1,#'A'
+001C 09               22                    INC R1
+001D 7744             23                    MOV @R1,#'D'
+001F 09               24                    INC R1
+0020 7748             25                    MOV @R1,#'H'
+0022 09               26                    INC R1
+0023 7749             27                    MOV @R1,#'I'
+0025 09               28                    INC R1
+0026 7754             29                    MOV @R1,#'T'
+0028 09               30                    INC R1
+0029 7748             31                    MOV @R1,#'H'
+002B 09               32                    INC R1
+002C 7741             33                    MOV @R1,#'A'
+002E 09               34                    INC R1
+002F 774E             35                    MOV @R1,#'N'
+                      36    
+0031 7438             37                    MOV A,#38H    ; initialize LCD
+0033 114D             38                    ACALL COMNWRT ; Call command Subroutine
+0035 740E             39                    MOV A, #0EH   ; Display on, cursor on.
+0037 114D             40                    ACALL COMNWRT ; Call command Subroutine.
+0039 7401             41                    MOV A, # 01   ; Clear LCD.
+003B 114D             42                    ACALL COMNWRT ; Call command subroutine
+003D 7480             43                MOV A, #80H ; Cursor at line 1 position 0
+003F 114D             44                    ACALL COMNWRT ; Call command subroutine.
+                      45    
+                      46    ; // MESSAGE DISPLY
+0041 7810             47                    MOV R0,#16
+0043 7960             48                    MOV R1,#60H
+0045 E7               49       LOOP:MOV A,@R1
+0046 1158             50                    ACALL DATAWRT
+0048 09               51                    INC R1
+0049 D8FA             52                    DJNZ R0,LOOP
+004B 80FE             53     AGAIN: SJMP AGAIN
+                      54    
+004D F590             55    COMNWRT:MOV P1, A
+004F C2B1             56                    CLR P3.1; RS=0 FOR COMMAND WRITE
+0051 C2B0             57                    CLR P3.0; R/W=0FOR WRITE
+0053 D2B2             58                    SETB P3.2; E=1 FOR HIGH PUSLSE
+MAIN                                                                                                          PAGE 2
+
+0055 C2B2             59                    CLR P3.2 ;E=0 FOR H-TO-L PULSE
+0057 22               60                    RET 
+                      61    
+0058 F590             62    DATAWRT:MOV P1, A; WRITE DATA TO LCD
+005A D2B1             63                    SETB P3.1; RS=1 FOR DATA
+005C C2B0             64                    CLR P3.0; R/W=0 F0R WRITE
+005E D2B2             65                    SETB P3.2; E=1 FOR HIGH PULSE
+0060 C2B2             66                    CLR P3.2; E=0 FOR H-TO-L PULSE
+0062 22               67                    RET
+                      68                    END
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 3
+
+AGAIN. . . . . . . . . . . . . .  C ADDR  004BH  
+COMNWRT. . . . . . . . . . . . .  C ADDR  004DH  
+DATAWRT. . . . . . . . . . . . .  C ADDR  0058H  
+LOOP . . . . . . . . . . . . . .  C ADDR  0045H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P3 . . . . . . . . . . . . . . .  D ADDR  00B0H  PREDEFINED  
